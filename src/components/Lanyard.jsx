@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
 import profileImg from '../assets/profile.jpeg';
 import pythonLogo from '../assets/python.svg';
@@ -14,6 +14,22 @@ const Lanyard = () => {
     // Physics refs
     const engineRef = useRef(null);
     const runnerRef = useRef(null);
+
+    // Responsive Scale
+    const [scale, setScale] = useState(1);
+
+    useEffect(() => {
+        const handleResize = () => {
+            // 400 is base width. Scale down if screen is smaller.
+            // We give a bit of buffer (30px) for padding
+            const newScale = Math.min((window.innerWidth - 30) / 400, 1);
+            setScale(newScale);
+        };
+
+        handleResize(); // Init
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current) return;
@@ -175,139 +191,148 @@ const Lanyard = () => {
     }, []);
 
     return (
-        <div ref={containerRef} style={{ position: 'relative', width: '400px', height: '600px', overflow: 'visible', margin: '0 auto', userSelect: 'none' }}>
-            <canvas ref={canvasRef} width={400} height={600} style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', zIndex: 1 }} />
+        <div style={{
+            position: 'relative',
+            width: '400px',
+            height: '600px',
+            margin: '0 auto',
+            transform: `scale(${scale})`,
+            transformOrigin: 'top center'
+        }}>
+            <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'visible', userSelect: 'none' }}>
+                <canvas ref={canvasRef} width={400} height={600} style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', zIndex: 1 }} />
 
-            <div
-                ref={cardRef}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '240px',
-                    height: '340px',
-                    marginTop: '-170px',
-                    marginLeft: '-120px',
-                    zIndex: 2,
-                    cursor: 'grab',
-                    perspective: '1000px'
-                }}
-            >
-                <div style={{
-                    width: '100%',
-                    height: '100%',
-                    position: 'relative',
-                    transition: 'transform 0.1s', // Physics-driven
-                    transformStyle: 'preserve-3d',
-                    // rotationY is set in loop
-                }}>
-                    {/* Front Face */}
-                    <div style={{
+                <div
+                    ref={cardRef}
+                    style={{
                         position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '240px',
+                        height: '340px',
+                        marginTop: '-170px',
+                        marginLeft: '-120px',
+                        zIndex: 2,
+                        cursor: 'grab',
+                        perspective: '1000px'
+                    }}
+                >
+                    <div style={{
                         width: '100%',
                         height: '100%',
-                        backfaceVisibility: 'hidden',
-                        background: '#0a0a0a',
-                        borderRadius: '20px',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+                        position: 'relative',
+                        transition: 'transform 0.1s', // Physics-driven
+                        transformStyle: 'preserve-3d',
+                        // rotationY is set in loop
                     }}>
-                        <div style={{ width: '100%', height: '100px', background: 'linear-gradient(135deg, var(--accent-color) 0%, #2a2a2a 100%)', position: 'absolute', top: 0 }}></div>
-
+                        {/* Front Face */}
                         <div style={{
-                            width: '130px',
-                            height: '130px',
-                            borderRadius: '50%',
-                            border: '4px solid #0a0a0a',
-                            marginTop: '35px',
-                            zIndex: 2,
-                            background: '#222',
-                            overflow: 'hidden'
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            backfaceVisibility: 'hidden',
+                            background: '#0a0a0a',
+                            borderRadius: '20px',
+                            overflow: 'hidden',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
                         }}>
-                            <img
-                                src={profileImg}
-                                alt="Profile"
-                                draggable={false}
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
-                                onError={(e) => { e.target.style.display = 'none'; }}
-                            />
+                            <div style={{ width: '100%', height: '100px', background: 'linear-gradient(135deg, var(--accent-color) 0%, #2a2a2a 100%)', position: 'absolute', top: 0 }}></div>
+
+                            <div style={{
+                                width: '130px',
+                                height: '130px',
+                                borderRadius: '50%',
+                                border: '4px solid #0a0a0a',
+                                marginTop: '35px',
+                                zIndex: 2,
+                                background: '#222',
+                                overflow: 'hidden'
+                            }}>
+                                <img
+                                    src={profileImg}
+                                    alt="Profile"
+                                    draggable={false}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
+                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                />
+                            </div>
+
+                            <div style={{ marginTop: '1.5rem', textAlign: 'center', zIndex: 2 }}>
+                                <h2 style={{ fontSize: '1.5rem', color: '#fff', margin: 0 }}>Abyan Hisyam</h2>
+                                <p style={{ color: 'var(--accent-color)', fontSize: '0.9rem', marginTop: '0.2rem' }}>ML Engineer</p>
+                            </div>
+
+                            <div style={{ marginTop: 'auto', marginBottom: '1.5rem', display: 'flex', gap: '8px', zIndex: 2 }}>
+                                <Badge text="Python" />
+                                <Badge text="PyTorch" />
+                                <Badge text="AI" />
+                            </div>
                         </div>
 
-                        <div style={{ marginTop: '1.5rem', textAlign: 'center', zIndex: 2 }}>
-                            <h2 style={{ fontSize: '1.5rem', color: '#fff', margin: 0 }}>Abyan Hisyam</h2>
-                            <p style={{ color: 'var(--accent-color)', fontSize: '0.9rem', marginTop: '0.2rem' }}>ML Engineer</p>
-                        </div>
-
-                        <div style={{ marginTop: 'auto', marginBottom: '1.5rem', display: 'flex', gap: '8px', zIndex: 2 }}>
-                            <Badge text="Python" />
-                            <Badge text="PyTorch" />
-                            <Badge text="AI" />
-                        </div>
-                    </div>
-
-                    {/* Back Face */}
-                    <div style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        backfaceVisibility: 'hidden',
-                        background: '#151515',
-                        borderRadius: '20px',
-                        transform: 'rotateY(180deg)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-                        padding: '20px'
-                    }}>
+                        {/* Back Face */}
                         <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr',
-                            gap: '20px',
-                            marginBottom: '20px',
-                            justifyItems: 'center',
-                            alignItems: 'center'
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            backfaceVisibility: 'hidden',
+                            background: '#151515',
+                            borderRadius: '20px',
+                            transform: 'rotateY(180deg)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+                            padding: '20px'
                         }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <img src={pythonLogo} alt="Python" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
-                                <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>Python</span>
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1fr',
+                                gap: '20px',
+                                marginBottom: '20px',
+                                justifyItems: 'center',
+                                alignItems: 'center'
+                            }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <img src={pythonLogo} alt="Python" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
+                                    <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>Python</span>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <img src={cppLogo} alt="C++" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
+                                    <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>C++</span>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <img src={reactLogo} alt="React" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
+                                    <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>React</span>
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <img src={sqlLogo} alt="SQL" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
+                                    <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>SQL</span>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <img src={cppLogo} alt="C++" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
-                                <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>C++</span>
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <img src={reactLogo} alt="React" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
-                                <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>React</span>
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <img src={sqlLogo} alt="SQL" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
-                                <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>SQL</span>
-                            </div>
+                            <h3 style={{ marginTop: '5px', color: '#fff', fontSize: '1.2rem', margin: 0 }}>Tech Stack</h3>
+                            <p style={{ color: '#666', fontSize: '0.8rem', marginTop: '5px' }}>Core Competencies</p>
                         </div>
-                        <h3 style={{ marginTop: '5px', color: '#fff', fontSize: '1.2rem', margin: 0 }}>Tech Stack</h3>
-                        <p style={{ color: '#666', fontSize: '0.8rem', marginTop: '5px' }}>Core Competencies</p>
                     </div>
                 </div>
-            </div>
 
-            <p style={{
-                position: 'absolute',
-                bottom: '20px',
-                width: '100%',
-                textAlign: 'center',
-                color: 'rgba(255,255,255,0.3)',
-                fontSize: '0.8rem',
-                pointerEvents: 'none'
-            }}>
-                Drag to swing
-            </p>
+                <p style={{
+                    position: 'absolute',
+                    bottom: '20px',
+                    width: '100%',
+                    textAlign: 'center',
+                    color: 'rgba(255,255,255,0.3)',
+                    fontSize: '0.8rem',
+                    pointerEvents: 'none'
+                }}>
+                    Drag to swing
+                </p>
+            </div>
         </div>
     );
 };
