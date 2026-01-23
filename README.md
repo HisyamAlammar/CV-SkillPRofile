@@ -1,20 +1,46 @@
-<<<<<<< HEAD
-# React + Vite
+# 🚀 Interactive 3D Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance portfolio website built for an **ML Engineer**, featuring a physics-based interactive lanyard and a responsive, aesthetic design.
 
-Currently, two official plugins are available:
+![Portfolio Preview](public/logo.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ key Features
 
-## React Compiler
+*   **Interactive 3D Lanyard**: A realistic, gravity-defying ID card simulation using `matter-js`. It reacts to drag gestures and device orientation, featuring a double-sided design (Profile / Tech Stack).
+*   **Responsive Design**: Optimized for all devices. The 3D interaction scales dynamically for mobile screens, and the navigation adapts with a smooth hamburger menu.
+*   **Modern Aesthetics**: Glassmorphism effects, gradient accents, and a clean, dark-themed UI.
+*   **Performance First**: Built with **Vite** and **React** for lightning-fast load times and HMR.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+*   **Frontend**: React 18, Vite
+*   **Physics Engine**: Matter.js
+*   **Styling**: Vanilla CSS (Custom Properties), Responsive Design
+*   **Icons**: Custom SVGs (Python, C++, React, SQL)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# CV-SkillPRofile
->>>>>>> 6d519547fc209cb1e5d861d095d6c18286a0948d
+## 🏃‍♂️ Getting Started
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/HisyamAlammar/CV-SkillPRofile.git
+    cd CV-SkillPRofile
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for production**
+    ```bash
+    npm run build
+    ```
+
+## 📄 License
+
+[MIT](LICENSE) © 2026 Abyan Hisyam Al'ammar
