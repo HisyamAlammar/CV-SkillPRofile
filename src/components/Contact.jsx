@@ -10,9 +10,9 @@ const Contact = () => {
         setStatus('sending');
 
         // REPLACE THESE WITH YOUR ACTUAL IDS FROM EMAILJS
-        const SERVICE_ID = 'service_id_placeholder';
-        const TEMPLATE_ID = 'template_id_placeholder';
-        const PUBLIC_KEY = 'public_key_placeholder';
+        const SERVICE_ID = 'service_xsolysr';
+        const TEMPLATE_ID = 'template_ptity9k';
+        const PUBLIC_KEY = 'E3h1KyeJyfRQRI77i';
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
@@ -38,10 +38,10 @@ const Contact = () => {
 
                     <form ref={form} onSubmit={sendEmail} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         <div className="input-group">
-                            <input type="text" name="user_name" placeholder="Name" required style={{ flex: 1, padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
-                            <input type="email" name="user_email" placeholder="Email" required style={{ flex: 1, padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
+                            <input type="text" name="name" placeholder="Name" required style={{ flex: 1, padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
+                            <input type="email" name="email" placeholder="Email" required style={{ flex: 1, padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
                         </div>
-                        <input type="text" name="subject" placeholder="Subject" required style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
+                        <input type="text" name="title" placeholder="Subject" required style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
                         <textarea name="message" rows="5" placeholder="Message" required style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none', resize: 'vertical' }}></textarea>
 
                         <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
