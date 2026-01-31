@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
 import profileImg from '../assets/profile.jpeg';
 import pythonLogo from '../assets/python.svg';
-import cppLogo from '../assets/cpp.svg';
+import pytorchLogo from '../assets/pytorch.svg';
 import reactLogo from '../assets/react.svg';
 import sqlLogo from '../assets/database.svg';
 
@@ -128,7 +128,13 @@ const Lanyard = () => {
             }
 
             // 2. Draw the Lanyard Strap
-            ctx.clearRect(0, 0, 400, 600);
+            // Clear full canvas (2400x1600) with identity transform
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, 2400, 1600);
+
+            // Translate context to center physics world (200, 300) onto canvas center (1200, 800)
+            // Offset = CanvasCenter - PhysicsCenter = (1200 - 200, 800 - 300) = (1000, 500)
+            ctx.translate(1000, 500);
 
             const attachPointX = cardBody.position.x + (-160 * Math.sin(-angle));
             const attachPointY = cardBody.position.y + (-160 * Math.cos(-angle));
@@ -139,13 +145,16 @@ const Lanyard = () => {
             const dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
             const strapAngle = Math.atan2(deltaY, deltaX);
 
+            // Clamp dist to prevent NaN/Explosion
+            const safeDist = (isNaN(dist) || dist < 0) ? 0 : dist;
+
             ctx.save();
             ctx.translate(anchor.position.x, anchor.position.y);
             ctx.rotate(strapAngle);
 
             // Draw Strap Background
-            ctx.fillStyle = '#111';
-            ctx.fillRect(0, -12, dist, 24); // 24px wide strap
+            ctx.fillStyle = '#222'; // Slightly lighter for visibility
+            ctx.fillRect(0, -12, safeDist, 24); // 24px wide strap
 
             // Draw Strap Text
             ctx.font = 'bold 12px monospace';
@@ -155,17 +164,20 @@ const Lanyard = () => {
 
             // Clip to rect
             ctx.beginPath();
-            ctx.rect(0, -12, dist, 24);
+            ctx.rect(0, -12, safeDist, 24);
             ctx.clip();
 
             // Draw text multiple times to cover length
-            for (let i = 0; i < dist; i += 150) {
+            for (let i = 0; i < safeDist; i += 150) {
                 ctx.fillText("ML ENGINEER", i + 75, 0);
             }
 
             ctx.restore();
 
             // Draw Clip/Hardware at anchor and attachment
+            // REMOVED as per user request to "hilangkan titik nya"
+
+            /*
             // Anchor
             ctx.beginPath();
             ctx.arc(anchor.position.x, anchor.position.y, 8, 0, 2 * Math.PI);
@@ -177,6 +189,7 @@ const Lanyard = () => {
             ctx.arc(attachPointX, attachPointY, 8, 0, 2 * Math.PI);
             ctx.fillStyle = '#333';
             ctx.fill();
+            */
 
             animationFrameId = requestAnimationFrame(updateLoop);
         };
@@ -200,7 +213,19 @@ const Lanyard = () => {
             transformOrigin: 'top center'
         }}>
             <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'visible', userSelect: 'none' }}>
-                <canvas ref={canvasRef} width={400} height={600} style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', zIndex: 1 }} />
+                <canvas
+                    ref={canvasRef}
+                    width={2400}
+                    height={1600}
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        pointerEvents: 'none',
+                        zIndex: 1
+                    }}
+                />
 
                 <div
                     ref={cardRef}
@@ -303,8 +328,8 @@ const Lanyard = () => {
                                     <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>Python</span>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <img src={cppLogo} alt="C++" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
-                                    <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>C++</span>
+                                    <img src={pytorchLogo} alt="PyTorch" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
+                                    <span style={{ fontSize: '0.7rem', color: '#888', marginTop: '5px' }}>PyTorch</span>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <img src={reactLogo} alt="React" draggable={false} style={{ width: '50px', height: '50px', objectFit: 'contain', pointerEvents: 'none' }} />
