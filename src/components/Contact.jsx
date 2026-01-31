@@ -31,13 +31,13 @@ const Contact = () => {
         <section id="contact" className="section" style={{ background: 'var(--secondary-bg)' }}>
             <div className="container">
                 <h2 className="section-title">Get In Touch</h2>
-                <div className="glass" style={{ maxWidth: '600px', margin: '0 auto', padding: '3rem' }}>
+                <div className="glass contact-card" style={{ maxWidth: '600px', margin: '0 auto' }}>
                     <p style={{ textAlign: 'center', marginBottom: '2rem' }}>
                         Have a question or want to work together? Feel free to leave a message!
                     </p>
 
                     <form ref={form} onSubmit={sendEmail} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div style={{ display: 'flex', gap: '1rem' }}>
+                        <div className="input-group">
                             <input type="text" name="user_name" placeholder="Name" required style={{ flex: 1, padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
                             <input type="email" name="user_email" placeholder="Email" required style={{ flex: 1, padding: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'white', outline: 'none' }} />
                         </div>
@@ -53,6 +53,23 @@ const Contact = () => {
                     </form>
                 </div>
             </div>
+            <style>{`
+                .contact-card {
+                    padding: 3rem;
+                }
+                .input-group {
+                    display: flex;
+                    gap: 1rem;
+                }
+                @media (max-width: 768px) {
+                    .contact-card {
+                        padding: 1.5rem;
+                    }
+                    .input-group {
+                        flex-direction: column;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
