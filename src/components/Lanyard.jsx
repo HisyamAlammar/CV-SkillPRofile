@@ -50,7 +50,7 @@ const Lanyard = () => {
 
         // Create bodies
         // 1. Anchor (Top point) - Static
-        const anchor = Bodies.circle(200, 20, 5, {
+        const anchor = Bodies.circle(200, 60, 5, { // Lowered from 20 to 60
             isStatic: true,
             render: { visible: false }
         });
@@ -146,7 +146,8 @@ const Lanyard = () => {
             const strapAngle = Math.atan2(deltaY, deltaX);
 
             // Clamp dist to prevent NaN/Explosion
-            const safeDist = (isNaN(dist) || dist < 0) ? 0 : dist;
+            // Add +100px overlap to ensure it penetrates deeply into the card header
+            const safeDist = ((isNaN(dist) || dist < 0) ? 0 : dist) + 100;
 
             ctx.save();
             ctx.translate(anchor.position.x, anchor.position.y);

@@ -160,8 +160,9 @@ const Hero = () => {
              /* Lanyard container on mobile */
              div[style*="height: 600px"] {
                 order: 1;
-                height: 400px !important;
-                margin-bottom: 2rem;
+                height: 500px !important; // Increased from 400px
+                margin-bottom: 0rem;
+                margin-top: 1rem;
              }
         }
       `}</style>
