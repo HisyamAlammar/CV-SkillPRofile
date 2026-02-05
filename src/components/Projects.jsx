@@ -17,7 +17,7 @@ const Projects = () => {
             title: "Capital Sense",
             description: "Intelligent stock evaluation platform combining Fundamental, Technical, and Sentiment analysis (NLP) for smart investment decisions.",
             tags: ["Python", "NLP", "Machine Learning", "Finance"],
-            link: "https://github.com/HisyamAlammar/CAPITAL-SENSE",
+            link: "https://capitalsense.up.railway.app/market",
             image: capitalSenseImg
         },
         {
