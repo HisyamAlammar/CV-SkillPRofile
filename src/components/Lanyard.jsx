@@ -226,7 +226,7 @@ const Lanyard = () => {
             transform: `scale(${scale})`,
             transformOrigin: 'top center'
         }}>
-            <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'visible', userSelect: 'none' }}>
+            <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'visible', userSelect: 'none', pointerEvents: 'none' }}>
                 <canvas
                     ref={canvasRef}
                     width={2400}
@@ -253,7 +253,8 @@ const Lanyard = () => {
                         marginLeft: '-120px',
                         zIndex: 2,
                         cursor: 'grab',
-                        perspective: '1000px'
+                        perspective: '1000px',
+                        pointerEvents: 'auto'
                     }}
                 >
                     <div style={{
@@ -379,11 +380,11 @@ const Lanyard = () => {
 const Badge = ({ text }) => (
     <span style={{
         fontSize: '0.75rem',
-        background: 'rgba(255,255,255,0.05)',
-        color: '#ccc',
+        background: 'rgba(255,255,255,0.15)',
+        color: '#fff',
         padding: '6px 12px',
         borderRadius: '12px',
-        border: '1px solid rgba(255,255,255,0.1)'
+        border: '1px solid rgba(255,255,255,0.2)'
     }}>
         {text}
     </span>

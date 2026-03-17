@@ -24,7 +24,11 @@ const Hero = () => {
             minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: '80px' // Offset for navbar
+            paddingTop: '80px', // Offset for navbar
+            paddingLeft: '1rem',
+            paddingRight: '1rem',
+            boxSizing: 'border-box',
+            maxWidth: '100vw'
         }}>
             {/* Background Elements */}
             <div style={{
@@ -80,7 +84,7 @@ const Hero = () => {
                         Focusing on Machine Learning and Deep Learning.
                     </p>
 
-                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+                    <div className="hero-cta-group" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                         <a href="#projects" className="btn btn-primary">View Work</a>
                         <a href="#contact" className="btn glass">Contact Me</a>
                         <a href={cvFile} target="_blank" rel="noopener noreferrer" className="btn glass" style={{ borderColor: 'var(--accent-color)', color: 'var(--accent-color)' }}>
@@ -157,6 +161,7 @@ const Hero = () => {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                margin-top: 2rem !important;
             }
             .animate-fade-in h1 {
                 font-size: 3rem !important;
@@ -167,7 +172,24 @@ const Hero = () => {
                 height: 500px !important; // Increased from 400px
                 margin-bottom: 0rem;
                 margin-top: 1rem;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
              }
+        }
+        @media (max-width: 480px) {
+            .animate-fade-in h1 {
+                font-size: 2.25rem !important;
+            }
+            .hero-cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-cta-group .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
       `}</style>
         </section>

@@ -81,6 +81,12 @@ button {
   -webkit-text-fill-color: transparent;
 }
 
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
 .holo-card h3 {
   font-size: 2rem;
   margin-bottom: 0.5rem;

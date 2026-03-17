@@ -91,7 +91,7 @@ const About = () => {
                     </div>
 
                     {/* Stats Row */}
-                    <div style={{ display: 'flex', gap: '4rem', justifyContent: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '3rem' }}>
+                    <div className="stats-container" style={{ display: 'flex', gap: '4rem', justifyContent: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '3rem' }}>
                         <div style={{ textAlign: 'center' }}>
                             <h3 style={{ fontSize: '3rem', color: 'var(--accent-color)', marginBottom: '0rem', fontWeight: 'bold' }}>2+</h3>
                             <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Years Exp.</p>
@@ -108,6 +108,19 @@ const About = () => {
 
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 768px) {
+                    .stats-container {
+                        gap: 1.5rem !important;
+                        flex-wrap: wrap;
+                        justify-content: space-around !important;
+                    }
+                    .stats-container h3 {
+                        font-size: 2rem !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };

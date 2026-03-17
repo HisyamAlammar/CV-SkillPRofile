@@ -61,12 +61,12 @@ const Projects = () => {
                                 <p style={{ color: '#aaa', marginBottom: '1rem', flex: 1 }}>{project.description}</p>
                                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
                                     {project.tags.map(tag => (
-                                        <span key={tag} style={{ fontSize: '0.8rem', padding: '4px 8px', background: 'rgba(100, 108, 255, 0.1)', color: 'var(--accent-color)', borderRadius: '4px' }}>
+                                        <span key={tag} style={{ fontSize: '0.8rem', padding: '4px 8px', background: 'rgba(100, 108, 255, 0.2)', color: '#e0e7ff', borderRadius: '4px' }}>
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <a href={project.link} className="btn-primary" style={{ textAlign: 'center', display: 'inline-block', width: '100%', textDecoration: 'none' }}>View Project</a>
+                                <a href={project.link} className="btn btn-primary" style={{ textAlign: 'center', display: 'inline-block', width: '100%', textDecoration: 'none' }}>View Project</a>
                             </div>
                         </div>
                     ))}
