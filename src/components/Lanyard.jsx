@@ -14,6 +14,7 @@ const Lanyard = () => {
     // Physics refs
     const engineRef = useRef(null);
     const runnerRef = useRef(null);
+    const mouseRef = useRef(null);
 
     // Responsive Scale
     const [scale, setScale] = useState(1);
@@ -80,6 +81,8 @@ const Lanyard = () => {
 
         // Mouse Interaction
         const mouse = Mouse.create(containerRef.current);
+        mouseRef.current = mouse;
+        
         const mouseConstraint = MouseConstraint.create(engine, {
             mouse: mouse,
             constraint: {
@@ -203,6 +206,16 @@ const Lanyard = () => {
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
+
+    // Sync physics mouse coordinate scale with CSS transform scale
+    useEffect(() => {
+        if (mouseRef.current) {
+            // Because CSS scale() shrinks the visual element, the physics engine 
+            // still thinks it's interacting with the unscaled size.
+            // We tell Matter.js to scale the mouse coordinates inversely.
+            Matter.Mouse.setScale(mouseRef.current, { x: 1 / scale, y: 1 / scale });
+        }
+    }, [scale]);
 
     return (
         <div style={{
