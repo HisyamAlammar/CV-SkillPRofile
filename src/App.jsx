@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -42,6 +43,7 @@ function App() {
         <p>&copy; {new Date().getFullYear()} Abyan Hisyam Al'ammar. All rights reserved.</p>
         <p style={{ marginTop: '0.5rem' }}>Built with React & Vite</p>
       </footer>
+      <Analytics />
     </div>
   );
 }
