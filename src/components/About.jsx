@@ -22,10 +22,10 @@ const About = () => {
                     {/* Intro Text */}
                     <div className="animate-fade-in" style={{ textAlign: 'center', marginBottom: '4rem' }}>
                         <p style={{ fontSize: '1.25rem', marginBottom: '1.5rem', lineHeight: '1.8', color: '#eee' }}>
-                            I am an <span style={{ color: 'var(--accent-color)', fontWeight: 'bold' }}>Informatics Engineering student</span> passionate about bridging the gap between complex AI logic and user-friendly web applications.
+                            I am an <span style={{ color: 'var(--accent-color)', fontWeight: 'bold' }}>Informatics student</span> and product-minded developer who enjoys building systems across AI, backend engineering, automation, and Web3.
                         </p>
                         <p style={{ fontSize: '1.1rem', color: '#aaa', lineHeight: '1.7', maxWidth: '750px', margin: '0 auto' }}>
-                            My journey involves diving deep into Machine Learning algorithms, Deep Learning architectures, and Neural Networks, while maintaining the engineering rigour to deploy them as scalable products.
+                            My work includes clinical decision support systems, AI-powered backend services, on-chain applications, automation workflows, and full-stack web platforms. I like exploring how software can turn complex ideas into practical, usable products.
                         </p>
                     </div>
 
@@ -34,58 +34,74 @@ const About = () => {
 
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
                         gap: '1.5rem',
                         marginBottom: '4rem'
                     }}>
-                        {/* Card 1: AI & ML */}
+                        {/* Card 1: AI Systems */}
                         <div className="glass" style={{ padding: '2rem', textAlign: 'left', transition: 'transform 0.3s', cursor: 'default' }}
                             onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
                             onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}>
                             <div style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V11a2 2 0 0 1-2 2H9a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-2a2 2 0 0 1-2-2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
-                                    <circle cx="12" cy="2" r="2"></circle>
-                                    <path d="M22 12a3 3 0 1 0-6 0 3 3 0 0 0 6 0"></path>
-                                    <path d="M8 12a3 3 0 1 0-6 0 3 3 0 0 0 6 0"></path>
+                                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h2a2 2 0 0 1 2 2v1a2 2 0 0 0 2 2 2 2 0 0 0-2 2v1a2 2 0 0 1-2 2h-2v1.27c.6.34 1 .99 1 1.73a2 2 0 0 1-4 0c0-.74.4-1.39 1-1.73V17H9a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2 2 2 0 0 0 2-2V9a2 2 0 0 1 2-2h2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
                                 </svg>
                             </div>
-                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>AI & Machine Learning</h4>
+                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>AI Systems</h4>
                             <p style={{ fontSize: '0.95rem', color: '#aaa', lineHeight: '1.6' }}>
-                                Building intelligent systems using PyTorch & TensorFlow. Specialized in Computer Vision, Pattern Recognition, and Deep Learning architectures.
+                                Building AI-powered applications using LLMs, RAG, multi-agent workflows, and machine learning models.
                             </p>
                         </div>
 
-                        {/* Card 2: Data Science */}
+                        {/* Card 2: Backend Engineering */}
                         <div className="glass" style={{ padding: '2rem', textAlign: 'left', transition: 'transform 0.3s', cursor: 'default' }}
                             onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
                             onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}>
                             <div style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
                                 </svg>
                             </div>
-                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>Data Science</h4>
+                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>Backend Engineering</h4>
                             <p style={{ fontSize: '0.95rem', color: '#aaa', lineHeight: '1.6' }}>
-                                Turning raw data into actionable insights. Proficient in Python, Pandas, NumPy, and advanced Data Visualization techniques.
+                                Designing APIs, authentication, databases, and scalable backend services for real-world applications.
                             </p>
                         </div>
 
-                        {/* Card 3: Web Integration */}
+                        {/* Card 3: Web3 Applications */}
                         <div className="glass" style={{ padding: '2rem', textAlign: 'left', transition: 'transform 0.3s', cursor: 'default' }}
                             onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
                             onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}>
                             <div style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="16 18 22 12 16 6"></polyline>
-                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                                 </svg>
                             </div>
-                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>Full-Stack Integration</h4>
+                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>Web3 Applications</h4>
                             <p style={{ fontSize: '0.95rem', color: '#aaa', lineHeight: '1.6' }}>
-                                Deploying AI models into seamless web applications. Expert in React, Next.js, and integrating Python backends with modern frontends.
+                                Building blockchain-integrated products, smart contract interactions, and on-chain verification systems.
+                            </p>
+                        </div>
+
+                        {/* Card 4: Automation Workflows */}
+                        <div className="glass" style={{ padding: '2rem', textAlign: 'left', transition: 'transform 0.3s', cursor: 'default' }}
+                            onMouseOver={e => e.currentTarget.style.transform = 'translateY(-5px)'}
+                            onMouseOut={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                            <div style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="16 3 21 3 21 8"></polyline>
+                                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                                    <polyline points="21 16 21 21 16 21"></polyline>
+                                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <h4 style={{ fontSize: '1.2rem', marginBottom: '0.8rem', color: '#fff' }}>Automation Workflows</h4>
+                            <p style={{ fontSize: '0.95rem', color: '#aaa', lineHeight: '1.6' }}>
+                                Creating workflow automation using n8n, Google Sheets, Telegram bots, AI APIs, and structured data pipelines.
                             </p>
                         </div>
                     </div>
@@ -94,15 +110,15 @@ const About = () => {
                     <div className="stats-container" style={{ display: 'flex', gap: '4rem', justifyContent: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '3rem' }}>
                         <div style={{ textAlign: 'center' }}>
                             <h3 style={{ fontSize: '3rem', color: 'var(--accent-color)', marginBottom: '0rem', fontWeight: 'bold' }}>2+</h3>
-                            <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Years Exp.</p>
+                            <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Years Building</p>
                         </div>
                         <div style={{ textAlign: 'center' }}>
                             <h3 style={{ fontSize: '3rem', color: 'var(--accent-color)', marginBottom: '0rem', fontWeight: 'bold' }}>10+</h3>
-                            <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Projects</p>
+                            <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Projects Built</p>
                         </div>
                         <div style={{ textAlign: 'center' }}>
-                            <h3 style={{ fontSize: '3rem', color: 'var(--accent-color)', marginBottom: '0rem', fontWeight: 'bold' }}>5+</h3>
-                            <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Happy Clients</p>
+                            <h3 style={{ fontSize: '3rem', color: 'var(--accent-color)', marginBottom: '0rem', fontWeight: 'bold' }}>3+</h3>
+                            <p style={{ fontSize: '0.9rem', color: '#888', textTransform: 'uppercase', letterSpacing: '1px' }}>Achievements</p>
                         </div>
                     </div>
 

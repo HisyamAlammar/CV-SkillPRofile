@@ -1,112 +1,119 @@
+import { useEffect, useState, useRef } from 'react';
+
 const Skills = () => {
-    const skills = [
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 }
+        );
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    const skillCategories = [
         {
-            name: "HTML",
-            level: "90%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
-            description: "Mampu membuat struktur website yang semantik, aksesibel, dan teroptimasi untuk SEO."
+            category: "AI & Machine Learning",
+            area: "ai",
+            primary: true,
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h2a2 2 0 0 1 2 2v1a2 2 0 0 0 2 2 2 2 0 0 0-2 2v1a2 2 0 0 1-2 2h-2v1.27c.6.34 1 .99 1 1.73a2 2 0 0 1-4 0c0-.74.4-1.39 1-1.73V17H9a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2 2 2 0 0 0 2-2V9a2 2 0 0 1 2-2h2V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
+                </svg>
+            ),
+            skills: ["Python", "PyTorch", "TensorFlow", "Scikit-learn", "LangChain", "RAG", "AI Agents", "Prompt Engineering"]
         },
         {
-            name: "CSS",
-            level: "85%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
-            description: "Mahir dalam layouting (Flexbox, Grid), animasi, dan desain responsif untuk berbagai perangkat."
+            category: "Web3",
+            area: "web3",
+            primary: false,
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+            ),
+            skills: ["Solidity", "Foundry", "Ethers.js", "go-ethereum", "Monad Testnet", "Polygon Amoy"]
         },
         {
-            name: "JavaScript",
-            level: "80%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
-            description: "Memahami konsep ES6+, DOM manipulation, dan asynchronous programming untuk website interaktif."
+            category: "Automation",
+            area: "auto",
+            primary: false,
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="16 3 21 3 21 8"></polyline>
+                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                    <polyline points="21 16 21 21 16 21"></polyline>
+                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                </svg>
+            ),
+            skills: ["n8n", "Google Sheets API", "Telegram Bot", "PDF Generation", "AI API Integration"]
         },
         {
-            name: "React",
-            level: "75%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-            description: "Berpengalaman membangun SPA dengan Hooks, state management, dan component-based architecture."
+            category: "Backend Engineering",
+            area: "backend",
+            primary: true,
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+            ),
+            skills: ["FastAPI", "Laravel", "Node.js", "Express.js", "Go Fiber", "REST API", "Authentication"]
         },
         {
-            name: "Node.js",
-            level: "70%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg",
-            description: "Bisa membuat REST API sederhana dan menangani logic backend menggunakan Express.js."
-        },
-        {
-            name: "Python",
-            level: "95%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
-            description: "Bahasa utama untuk pengembangan AI/ML. Mahir dalam data manipulation (Pandas, NumPy) dan scripting."
-        },
-        {
-            name: "TensorFlow",
-            level: "85%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg",
-            description: "Membangun dan melatih neural networks untuk computer vision dan NLP task."
-        },
-        {
-            name: "PyTorch",
-            level: "80%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Pytorch_logo.png",
-            description: "Framework pilihan untuk riset Deep Learning, custom architecture, dan prototyping model."
-        },
-        {
-            name: "Scikit-Learn",
-            level: "90%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg",
-            description: "Implementasi algoritma ML klasik (Regression, Classification, Clustering) untuk analisis data."
-        },
-        {
-            name: "SQL",
-            level: "75%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png",
-            description: "Mampu merancang database relasional dan menulis query kompleks untuk manajemen data."
-        },
-        {
-            name: "Git",
-            level: "85%",
-            logo: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Git-logo.svg",
-            description: "Terbiasa menggunakan version control untuk kolaborasi tim dan manajemen kode source."
+            category: "Database & Infrastructure",
+            area: "db",
+            primary: false,
+            icon: (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+            ),
+            skills: ["PostgreSQL", "MySQL", "Redis", "Docker", "Railway", "Vercel", "GitHub Actions"]
         }
     ];
 
-
-    // Duplicate skills for seamless infinite scroll
-    const allSkills = [...skills, ...skills];
-
     return (
-        <section id="skills" className="section" style={{ background: 'var(--secondary-bg)' }}>
-            <div className="container" style={{ maxWidth: '100%', overflow: 'hidden' }}>
+        <section id="skills" className="section" style={{ background: 'var(--secondary-bg)' }} ref={sectionRef}>
+            <div className="container">
                 <h2 className="section-title">My Skills</h2>
-                <div className="scroll-wrapper">
-                    <div className="scroll-container">
-                        {allSkills.map((skill, index) => (
-                            <div key={`${skill.name}-${index}`} className="flip-card" style={{ flex: '0 0 auto', width: '280px' }}>
-                                <div className="flip-card-inner">
-                                    {/* Front Side */}
-                                    <div className="flip-card-front">
-                                        <img src={skill.logo} alt={`${skill.name} Logo`} className="skill-logo" />
-                                        <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{skill.name}</h3>
-                                        <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px' }}>
-                                            <div style={{
-                                                width: skill.level,
-                                                height: '100%',
-                                                background: 'var(--accent-color)',
-                                                borderRadius: '4px'
-                                            }}></div>
-                                        </div>
-                                        <span style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#aaa' }}>{skill.level} Proficiency</span>
-                                    </div>
-
-                                    {/* Back Side */}
-                                    <div className="flip-card-back">
-                                        <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>{skill.name}</h3>
-                                        <p style={{ fontSize: '1rem', lineHeight: '1.6' }}>
-                                            {skill.description}
-                                        </p>
-                                    </div>
+                <div className="bento-grid">
+                    {skillCategories.map((cat, index) => (
+                        <div
+                            key={cat.category}
+                            className={`bento-card glass ${cat.primary ? 'bento-card--primary' : ''} ${isVisible ? 'bento-card--visible' : ''}`}
+                            style={{
+                                gridArea: cat.area,
+                                transitionDelay: isVisible ? `${index * 0.1}s` : '0s'
+                            }}
+                        >
+                            <div className="bento-card-header">
+                                <div className="bento-card-icon">
+                                    {cat.icon}
                                 </div>
+                                <h3 className="bento-card-title">{cat.category}</h3>
                             </div>
-                        ))}
-                    </div>
+                            <div className="bento-tags">
+                                {cat.skills.map(skill => (
+                                    <span key={skill} className="bento-tag">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

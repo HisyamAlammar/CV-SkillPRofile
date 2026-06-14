@@ -1,12 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Lanyard from './Lanyard';
 import cvFile from '../assets/CV_Abyan_Hisyam.pdf';
 
 const Hero = () => {
     const [text, setText] = useState('');
-    const fullText = "Machine Learning Engineer";
+    const fullText = "AI, Backend & Web3 Builder";
     const [index, setIndex] = useState(0);
+    const [typingDone, setTypingDone] = useState(false);
 
+    // Rotating role text
+    const roles = useMemo(() => [
+        "Building AI-powered backends",
+        "Designing Web3 infrastructure",
+        "Automating complex workflows",
+        "Shipping production systems"
+    ], []);
+    const [roleIndex, setRoleIndex] = useState(0);
+    const [roleVisible, setRoleVisible] = useState(false);
+
+    // Typewriter effect
     useEffect(() => {
         if (index < fullText.length) {
             const timeout = setTimeout(() => {
@@ -14,8 +26,35 @@ const Hero = () => {
                 setIndex(prev => prev + 1);
             }, 100);
             return () => clearTimeout(timeout);
+        } else {
+            const timer = setTimeout(() => {
+                setTypingDone(true);
+                setRoleVisible(true);
+            }, 1200);
+            return () => clearTimeout(timer);
         }
     }, [index]);
+
+    // Cycle rotating roles
+    useEffect(() => {
+        if (!typingDone) return;
+        const interval = setInterval(() => {
+            setRoleVisible(false);
+            setTimeout(() => {
+                setRoleIndex(prev => (prev + 1) % roles.length);
+                setRoleVisible(true);
+            }, 500);
+        }, 3500);
+        return () => clearInterval(interval);
+    }, [typingDone, roles]);
+
+    const floatingBadges = [
+        { text: "FastAPI", top: "10%", left: "68%", delay: "0s" },
+        { text: "LangChain", top: "72%", left: "78%", delay: "1.2s" },
+        { text: "Solidity", top: "82%", left: "8%", delay: "2.4s" },
+        { text: "n8n", top: "4%", left: "85%", delay: "0.6s" },
+        { text: "Docker", top: "50%", left: "90%", delay: "1.8s" },
+    ];
 
     return (
         <section id="home" className="section" style={{
@@ -24,7 +63,7 @@ const Hero = () => {
             minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: '80px', // Offset for navbar
+            paddingTop: '80px',
             paddingLeft: '1rem',
             paddingRight: '1rem',
             boxSizing: 'border-box',
@@ -71,17 +110,27 @@ const Hero = () => {
                 width: '100%'
             }}>
                 {/* Text Content (Left) */}
-                <div className="animate-fade-in" style={{ textAlign: 'left', zIndex: 1 }}>
+                <div className="animate-fade-in" style={{ textAlign: 'left', zIndex: 1, position: 'relative' }}>
                     <h2 style={{ fontSize: '1.5rem', color: 'var(--accent-color)', marginBottom: '1rem' }}>Hello, I'm</h2>
                     <h1 style={{ fontSize: '5rem', fontWeight: 700, marginBottom: '1rem', lineHeight: 1.1, background: 'linear-gradient(to right, #fff, #aaa)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                         Abyan Hisyam Al'ammar
                     </h1>
-                    <h3 style={{ fontSize: '2rem', marginBottom: '2rem', fontFamily: 'var(--font-code)', minHeight: '3rem', color: '#ccc' }}>
+                    <h3 style={{ fontSize: '2rem', marginBottom: '0.5rem', fontFamily: 'var(--font-code)', minHeight: '3rem', color: '#ccc' }}>
                         {text}<span className="cursor">|</span>
                     </h3>
+
+                    {/* Rotating Role Text */}
+                    <div className="hero-rotating-wrapper">
+                        {typingDone && (
+                            <p className={`hero-rotating-text ${roleVisible ? 'hero-rotating-text--visible' : ''}`}>
+                                {`> ${roles[roleIndex]}`}
+                            </p>
+                        )}
+                    </div>
+
                     <p style={{ maxWidth: '600px', margin: '0 0 2rem 0', color: '#888', fontSize: '1.1rem', lineHeight: '1.6' }}>
-                        Exploring the depths of Artificial Intelligence. <br />
-                        Focusing on Machine Learning and Deep Learning.
+                        I build intelligent systems, backend services, automation workflows,<br />
+                        and Web3 applications — turning ideas into practical, usable products.
                     </p>
 
                     <div className="hero-cta-group" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
@@ -111,6 +160,23 @@ const Hero = () => {
                             </svg>
                         </a>
                     </div>
+
+                    {/* Floating Tech Badges */}
+                    <div className="hero-floating-badges">
+                        {floatingBadges.map((badge, i) => (
+                            <span
+                                key={i}
+                                className="hero-floating-badge"
+                                style={{
+                                    top: badge.top,
+                                    left: badge.left,
+                                    animationDelay: badge.delay
+                                }}
+                            >
+                                {badge.text}
+                            </span>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Lanyard Graphic (Right) */}
@@ -121,7 +187,6 @@ const Hero = () => {
                     alignItems: 'flex-start',
                     paddingTop: '0',
                     zIndex: 2,
-                    // pointerEvents: 'none' // We need pointer events for the lanyard
                 }}>
                     <div style={{ transform: 'scale(1)' }}>
                         <Lanyard />
@@ -174,7 +239,7 @@ const Hero = () => {
              /* Lanyard container on mobile */
              div[style*="height: 600px"] {
                 order: 1;
-                height: 500px !important; // Increased from 400px
+                height: 500px !important;
                 margin-bottom: 0rem;
                 margin-top: 1rem;
                 width: 100%;
